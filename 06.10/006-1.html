@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <label for="kor"></label>
+            <input type="number" id="국어" placeholder="국어점수" min="0" max="100" required>
+        </div>
+        <div>
+            <label for="eng"></label>
+            <input type="number" id="영어" placeholder="영어점수" min="0" max="100" required>
+        </div>
+        <button onclick="점수()">결과</button>
+    </div>
+    <script>
+        function 점수(){
+            const korElem = document.querySelector('#국어');
+            const engElem = document.querySelector('#영어');
+            const kor = parseInt(korElem.value);
+            const eng = parseInt(engElem.value);
+            const avg = (kor+eng)/2;
+
+            if(kor,eng>100){
+                alert('잘못입력');
+                return; //함수종료
+            }
+
+            if(avg>=90){
+                alert("우수")
+            } else if(avg>=70){
+                alert("통과")
+            } else{
+                alert("재시험")
+            }
+        }
+    </script>
+</body>
+</html>

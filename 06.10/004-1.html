@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            <label for="키">키</label>
+            <input type="text" id="키" placeholder="cm">
+        </div>
+        <div>
+            <label for="체중">체중</label>
+            <input type="text" id="체중"placeholder="kg">
+        </div>
+    </div>
+    <button onclick="계산()">계산하기</button>
+    <script>
+        function 계산(){
+            const 키 = document.querySelector('#키').value;
+            const 체중 = document.querySelector('#체중').value;
+            const 적정체중 = parseInt(키) - 105;
+            const min = 적정체중*0.9;
+            const max = 적정체중*1.1;
+
+            if( 체중 >= min && 체중 <= max){
+                alert("적정 체중입니다")
+            } else{
+                alert("적정체중이 아닙니다")
+            }
+        }
+    </script>
+</body>
+</html>

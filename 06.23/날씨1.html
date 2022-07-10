@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const init=(cities)=>{
+            const $buttons= $('#buttons');
+            cities.forEach((city,i)=>$('<button>').text(city.name).attr('data-cno',i).appendTo($buttons));        
+        }
+
+        const getPosition = async(url,city,key)=>{
+            const param={q:city, appid:key};
+            const result = await $.ajax({url:url, data:param});
+            return{위도:result[0].lat, 경도:result[0].lon}
+        }
+
+        const getWeatherAndAir = async(weatherUrl,airUrl,position,key)=>{
+            const param={lat:position.위도,lot:position.경도,appid:key}
+            const airResult=await $.ajax({url:airUrl,data:param});
+
+            param.units='metirc';
+            const weatherResult=await $.ajax({url:weatherUrl, data:param});
+            console.log(weatherResult);
+        }
+
+        $(document).ready(async function(){
+            const cities = [
+                {name:'인천',code:'Incheon'},
+                {name:'도쿄',code:'Tokyo'},
+                {name:'하노이',code:'Hanoi'},
+                {name:'방콕',code:'Bangkok'},
+            ]
+            
+            const key="ac7bd84b82bde1e5e29c4da01645c10e";
+            const positionUrl=`https://api.openweathermap.org/geo/1.0/direct`;
+            const airUrl = `https://api.openweathermap.org/data/2.5/air_pollution`;
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/onecall`;
+            let cno=0;
+            init(cities);
+
+            position= await getPosition(positionUrl,cities[cno].code,key);
+            
+
+         $('button').click(async function(){
+             cno=parseInt($(this).attr('data-cno'));
+            position = await getPosition(positionUrl,cities[cno].code,key);
+            console.log(position)
+         })
+
+        });
+
+    </script>
+
+
+</head>
+<body>
+        <div id="app"></div>
+        <div id="weather"></div>
+        <div id="buttons"></div>
+</body>
+</html>

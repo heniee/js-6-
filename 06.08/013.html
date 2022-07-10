@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--반지름을 입력받아 원의 면적을 출력하시오-->
+</head>
+<body>
+    <input type="text" id="value">
+    <button onclick="계산()">원의 면적 계산</button>
+    <div>원의면적 :<span id="target"></span></div>
+
+    <script>
+        function 계산() {
+            const value = document.querySelector('#value').value;
+            const result = value * value * Math.PI; //3.14를 뜻함
+            console.log(result)
+
+            const target = document.querySelector('#target').innerHTML = result;
+         }
+    </script>
+</body>
+</html>

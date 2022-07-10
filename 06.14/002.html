@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const ar = [3,5,7,9];
+        for(let i=0; i<=3; i++){
+            console.log(ar[i]);
+        }
+
+        const br = [55,33,4545,22,56,44,33];
+        for(let p=0; p<br.length; p++){
+            console.log(br[p]);
+        }
+        
+        //br의 원소가 하나씩 꺼내서 ob에 담겨진다 / 배열로 작업x 
+        for(const ob of br){
+            console.log(ob);
+        }
+        
+         // of 반복문으로 cr의 합계를 sum에 담아 출력하시오 
+        const cr = [1,2,3,4,5];
+        let sum = 0;
+
+        for(let i=0; i<cr.length; i++){
+            //sum = sum + cr;
+            sum += cr[i];
+        } 
+        console.log(sum);   //15
+
+    </script>
+</body>
+</html>

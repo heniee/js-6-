@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const ar=[
+            {kor:77, eng:88}, {kor:75, eng:70}, {kor:80, eng:90}
+        ];
+
+        for(const ob of ar) {
+            console.log(ob.kor);
+        }
+
+        // 영어 성적의 합계와 평균을 출력하시오
+        let sumENG = 0;
+        for (const ob of ar){
+            sumENG= sumENG+ob.eng;
+        }
+        console.log(sumENG);
+        const avg=sumENG/ar.length;
+
+        console.log(`합계는${sumENG}, 평균은 ${avg}`)
+    </script>
+</body>
+</html>

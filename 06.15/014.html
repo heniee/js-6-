@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script>
+        const url= 'http://sample.bmaster.kro.kr/contacts?pageno=2&pagesize=10';
+
+        window.onload= function() {
+            $.ajax(url).done(function(resposnse){
+                const contacts =response.contacts;
+                const $list = $('#list');
+                for(c of contacts) {
+                    const str = `<p>이름: ${c.name}, 주소: ${c.address}, 연락처: ${c.tel}</p>`
+                    $(str).appendTo($list);
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr><th>번호</th><th>이름</th></tr>
+        </thead>
+        <tbody id="list">
+
+        </tbody>
+    </table>
+</body>
+</html>

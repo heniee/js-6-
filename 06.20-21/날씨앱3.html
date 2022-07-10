@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <title>날씨앱</title>
+
+ <script>
+     const key='fd54227fdbbffebbf18857a95bf9288a';
+     let 좌표 = null;
+     let 날씨 = null;
+     //const url=`https://api.openweathermap.org/data/2.5/weather?q=Incheon&appid=${key}&units=metric`;
+     const url=`http://api.openweathermap.org/geo/1.0/direct?q=Incheon&limit=5&appid=${key}`; //위도,경도
+      
+     async function getPosition(){
+        const result=await $.ajax(url);
+        위도 = result[0].lat;
+        경도 = result[0].lon;
+        좌표 = {위도,경도};
+     }
+
+     function getFormatDate(date){
+        //날짜를 '6월20일'
+        return `${date.getMonth()+1}월 ${date.getDay()}일`;
+     }
+
+     function getFormatTime(date){
+        //날짜를 '11:25'
+        return `${date.getHours()}: ${date.getMinutes()}`;
+     }
+      async function getWeather(){
+        const url=`https://api.openweathermap.org/data/2.5/onecall?lat=${좌표.위도}&lon=${좌표.경도}&appid=${key}&units=metric`;
+        const result = await $.ajax(url)
+         const 일출 = new Date(result.current.sunrise*1000);
+         const 일몰 = new Date(result.current.sunset*1000);
+         const 온도 = result.current.temp;
+         const 습도 = result.current.humidity;
+         const 최저 = result.daily[0].temp.min;
+         const 최고 = result.daily[0].temp.max;
+         const 체감 = result.current.feels_like;
+         const 자외선 = result.current.uvi;
+         const 상태=result.current.weather[0].main;
+
+         // 날씨예보(result.daily)에서 내일과 모레의 날짜, 상태,최고온도
+         let 예보 = [];
+         for(let i=1; i<=7; i++){
+            const sunrise = new Date(result.daily[i].sunrise*1000);
+            const 날짜 = getFormatDate(sunrise);
+            const 일출 = getFormatTime(sunrise);
+            const 상태 = result.daily[i].weather[0].main;
+            예보[i-1] = {날짜,일출,상태};
+         }    
+         
+         날씨={일출,일몰,온도,습도,최저,최고,체감,자외선,상태,예보} 
+         console.log(날씨);      
+    }
+
+      // 미세먼지 
+      async function getPollution(){
+         const url2=`http://api.openweathermap.org/data/2.5/air_pollution?lat=${좌표.위도}&lon=${좌표.경도}&appid=${key}`;
+         const result2 = await $.ajax(url2);
+         const 미세 = result2.list[0].components.pm10;
+         const 초미세 = result2.list[0].components.pm2_5;
+         console.log(미세);
+         console.log(초미세);
+         
+      }
+
+
+      $(document).ready(async function(){
+         await getPosition();
+         await getWeather();
+         await getPollution();
+      })
+   
+
+ </script>
+</head>
+<body>
+    <h1>Weather App</h1>
+
+</body>
+</html>

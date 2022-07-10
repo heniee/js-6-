@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>요청과 응답</title>
+    <script>
+        // 폼을 직접 보내지않고 js로 검증 후 submit
+        $('#login').click(function(){
+            
+            $('#loginForm'). submit();
+        });
+
+        //폼을 이용해 ajax를 보낸다면
+        $('#login').click(function(){
+            $.ajax({
+                url:'서버주소',
+                //data의 기본형식 : aaa=bbb&ccc=ddd
+                data: $('#loginForm').serialize()
+            })
+            alert(`당신의 아이디는 ${response.username}입니다`);
+        })
+    </script>
+</head>
+<body>
+    <!-- 클라이언트가 서버로 보내는 데이터들 : 요청객체
+
+        많은 클라이언트, 수없이 많은 백...공용어를 사용해 더한다 
+
+        요청객체의 기본 데이터 형식 : urlencoded
+        요청객체의 파일에 담긴 경우 : formdata
+        나중에 추가된 공용어 : json(ajax전용)
+    
+        form은 mvc용 = method가 get과 post만 가능 -->
+
+        
+    <form id="loginForm" action ="#" method="get" enctype="application/x-www-form-urlencoded">
+        <input type="text" id=" username" value="spring" name="username">
+        <input type="text" id=" password" value="1234" name="password">
+        <button type="button" id="login">로그인</button>
+    </form>
+</body>
+</html>

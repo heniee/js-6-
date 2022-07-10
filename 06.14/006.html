@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 이름, 국어, 영어점수를 가지는 객체를 만드시오
+    아래와 같이 출력하는 함수를 만드시오
+    '홍길동의 평균점수는 85점'-->
+<body>
+    <script>
+        const obj1 ={
+          irum : "홍길동",
+          kor : 100,
+          eng : 70,
+            print : function() {
+                const avg = (this.kor + this.eng) /2 ;
+                console.log(`${this.irum}의 평균점수는 ${avg}점`);
+            }
+         }
+
+     obj1.print();
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        function getPage(){
+            let page= parseInt(location.search.substr(6));
+            if(isNaN(page)==true)
+                return 1;
+                return page;
+        }
+
+        async function getResponse(url,pageno,pagesize){
+            const params = {pageno,pagesize};
+            return await $.ajax({url:url, data:params});
+        }
+
+        function printContacts({contacts}){
+            const $list = $('#list');
+                for(c of contacts){
+                    const $tr = $('<tr>').appendTo($list);
+                    $('<td>').text(c.no).appendTo($tr);
+                        const $td = $('<td>').appendTo($tr);
+                        $('<A>').attr('href',`/read.html?no=${c.no}`).text(c.name).appendTo($tr);
+                    $('<td>').text(c.address).appendTo($tr);
+                    $('<td>').text(c.tel).appendTo($tr);
+                }
+        }
+        $(document).ready(async function(){
+            const pagesize=10;
+            const url = 'http://sample.bmaster.kro.kr/contacts';
+            const page = getPage();
+            const response = await getResponse(url,page,pagesize);
+            console.log(response);
+            printContacts(response);
+            //const pagination = getPagination(response);
+           // printPagination(pagination);
+        })
+    </script>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <thead> 
+                <tr>
+                    <td>번호</td>
+                    <td>이름</td>
+                    <td>주소</td>
+                    <td>연락처</td>
+                </tr>
+            </thead>
+            <tbody id="list">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>l

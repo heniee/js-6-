@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>null</title>
+</head>
+<body>
+    <div id="hello"></div>
+    <script>
+        const div = document.querySelector('#hi');
+
+        // 변수는 값을 1개만 저장한다
+        // -> color가 저장하고 있는값은? 객체번호
+        // color는 값이 아닌 객체번호를 가진다
+        // color는 객체 그 자체가 아니래 객체의 리모컨 역할 
+        const color ={ red:255, green:0, red:0};
+        console.log(color.red); // color가 가지고 있는 red를 찍어라 
+
+        console.log(div);
+        console.log(typeof div);
+        consol.log(div.id);
+    </script>
+</body>
+</html>

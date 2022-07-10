@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        .title{display: inline-block;
+            width: 300px;}
+        .done{text-decoration: line-through;}
+    </style>
+    <script>
+        const addTodo=(todos)=>{
+            todos.push({title: $('input').val(), done:false});
+            $('input').val('');
+            print(todos)
+        }
+
+        const print=(todos)=>{
+            const $ul= $('#todos');
+            $ul.empty();
+            todos.forEach((todo,index)=>{
+            const $li= $('<li>').attr('class','todo').attr('data-i',index).appendTo($ul);
+                if(todo.done==true){
+                    $('<span class="title">').text(todo.title+ "(완료)"). addClass('done').attr('data-i',index).appendTo($li);
+                } else {
+                    $('<span class="title">').text(todo.title).attr('data-i',index).appendTo($li);
+                }
+                    $('<span>').attr('class','close').text('x').attr('data-i',index).appendTo($li);
+        });
+    };
+        $(document).ready(function(){
+            const todos = [
+        { title : "산책하기", done:false },
+        { title : "공부하기", done:true },
+        { title : "책읽기", done:false },
+        { title : "운동하기", done:false }
+      ];
+
+      print(todos);
+
+           $('#add').click(function(){
+               addTodo(todos);
+           }) 
+           $('#input').keyup(function(e){
+               if(e.keyCode===13)
+               addTodo(todos);
+           });
+           $('#todos').on('click','.title',function(){
+                todos[$(this).attr('data-i')].done =! todos[$(this).attr('data-i')].done;
+                print(todos);
+           })
+           $('#todos').on('click','.close',function(){
+               todos.splice($(this).attr('index,i'),1);
+               print(todos);
+           })
+        })
+    </script>
+</head>
+<body>
+    <h1 class="main">TO-DO LIST</h1>
+      <div id="app">
+        <input type="text" id="input" placeholder="할일을 추가하세요 ">
+        <button id="add">추가</button>
+        <ul id="todos">
+        </ul>
+      </div>  
+</body>
+</html>

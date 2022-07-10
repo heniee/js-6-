@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        function getPage(){
+            let page= parseInt(location.search.substr(6));
+            if(isNaN(page)==true)
+                return 1;
+                return page;
+        }
+
+        async function getResponse(url,pageno,pagesize){
+            const params = {pageno,pagesize};
+            //비동기:병렬 실행되는 함수
+            return await $.ajax({url:url, data:params});
+        }
+        $(document).ready(async function(){
+            const pagesize=10;
+            const url = 'http://sample.bmaster.kro.kr/contacts';
+            const page = getPage();
+            const response = await getResponse(url,pageno,pagesize);
+            console.log(response);
+          //  printContacts(response);
+            //const pagination = getPagination(response);
+           // printPagination(pagination);
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>l

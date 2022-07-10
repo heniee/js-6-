@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload=function(){
+            const input =document.querySelector('#radius');
+            const 계산 =document.querySelector('#계산');
+            
+            계산.onclick =function() {
+                const 값 = parseInt(input.value);
+                const result= 값%2==0 ;
+                const result2= 값*값 ;
+                console.log(result);
+
+                const result3 = document.querySelector('#result1').innerHTML = result;
+                const result4 = document.querySelector('#result2').innerHTML = result2;
+              }
+        }
+    </script>
+</head>
+<body>
+    값:<input type="text" id="radius">
+    <button id="계산">계산</button><br>
+    짝수여부 : <span id="result1"></span><br>
+    제곱값 : <span id="result2"></span>
+</body>
+</html>

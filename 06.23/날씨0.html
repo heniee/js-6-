@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const init=(cities)=>{
+            const $buttons=$('#buttons');
+            cities.forEach((city,i)=>$('<button>').text(city.name).attr('data-cno',i).appendTo($buttons));
+        }
+
+        const getPosition=async (url,city,key)=>{
+            const param={q:city, appid:key};
+            const result= await $.ajax({url:url, data:param});
+            return{위도:result[0].lat, 경도:result[0].lon};
+        }
+
+        const getWeatherAndAir = async(weatherUrl,airUrl,position,key)=>{
+            const param= {lat:position.위도, lon:position.경도, appid:key};
+            const airResult = await $.ajax({url:airUrl, data:param});
+
+            param.units= 'metric';
+            const weatherResult = await $.ajax({url:weatherUrl, data:param});
+            console.log(weatherResult);
+           const result = {
+               날씨: weatherResult.current.weather[0].main,
+               온도: weatherResult.current.temp,
+               자외선: weatherResult.current.uvi,
+               미세먼지: airResult.list[0].components.pm10,
+           };
+           return result;
+        }
+
+        const printWeather = (city,position,weather)=>{
+            const $weather= $('#weather');
+
+            $weather.empty();
+            $('<div>').text(`${city} : (위도: ${position.위도}, 경도: ${position.경도})`).appendTo($weather);
+            $('<div>').text(weather.날씨).appendTo($weather);    
+            $('<div>').text(`온도: ${weather.온도}`).appendTo($weather);
+            $('<div>').text(`자외선: ${weather.자외선}`).appendTo($weather);
+            $('<div>').text(`미세먼지: ${weather.미세먼지}`).appendTo($weather);
+        }
+
+        $(document).ready(async function(){
+            const cities=[
+                {name:'인천',code:'Incheon'},
+                {name:'도쿄',code:'Tokyo'},
+                {name:'하노이',code:'Hanoi'},
+                {name:'방콕',code:'Bangkok'},
+            ];
+            const key="ac7bd84b82bde1e5e29c4da01645c10e";
+            const positionUrl=`https://api.openweathermap.org/geo/1.0/direct`;
+            const airUrl=`https://api.openweathermap.org/data/2.5/air_pollution`;
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/onecall`;
+            
+            let cno=0;
+            init(cities);
+            let position=null;
+            let weather=null;
+            
+          position= await getPosition(positionUrl,cities[cno].code,key);
+          weather = await getWeatherAndAir(weatherUrl,airUrl,position,key);
+          printWeather(cities[cno].code,position,weather);
+
+        
+            
+        $('button').click(async function(){
+            cno=parseInt($(this).attr('data-cno'));
+           position = await getPosition(positionUrl,cities[cno].code,key);
+           weather = await getWeatherAndAir(weatherUrl,airUrl,position,key);
+           printWeather(cities[cno].code,position,weather);
+
+       
+        });
+        });
+        
+   </script>
+ 
+</head>
+<body>
+        <div id="app"></div>
+        <div id="weather"></div>
+        <div id="buttons"></div>
+</body>
+</html>
+

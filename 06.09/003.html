@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const menu = [];
+        let index=0;
+
+        function 메뉴추가() {
+            const food = document.querySelector('#식사').value;
+            menu[index] = food;
+            index++;
+            console.log(menu);
+            document.querySelector('#result').innerHTML = menu;
+        }
+        function 요리추가() {
+            const food = document.querySelector('#요리').value;
+            menu[index] = food;
+            index++;
+            console.log(menu);
+            document.querySelector('#result').innerHTML = menu;
+        }
+    </script>
+</head>
+<body>
+   
+    <select id="식사" onchange="메뉴추가();">
+        <option disabled selected>메뉴를 선택하세요</option>
+        <option>짜장</option> 
+        <option>짬뽕</option>
+        <option>볶음밥</option>
+    </select>
+    
+    <select id="요리" onchange="요리추가();">
+        <option disabled selected>메뉴를 선택하세요</option>
+        <option>탕수육</option> 
+        <option>깐풍기</option>
+        <option>라조기</option>
+    </select>
+    <div id="result"></div>
+
+</body>
+</html>

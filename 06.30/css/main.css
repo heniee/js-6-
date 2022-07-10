@@ -1,0 +1,10 @@
+#page{width:1000px; margin: 0 auto}
+header,nav,footer{height:50px; background-color: rgb(190, 194, 193);}
+#main{
+    display:flex;
+    justify-content: space-between;
+}
+aside{flex-grow: 1; background-color: rgb(247, 243, 194);}
+section{flex-grow: 3; min-height:600px;}
+.table{justify-content: center;}
+#pagination{display:flex; justify-content: center;}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예외(exception)</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <script>
+        $(document).ready(async function(){
+          try{
+            const response = await $.ajax('http://192.168.0.34/board/all')
+            console.log(response);
+        }catch(ex){
+            // ex.responxe가 서버가 보내준 http 상태코드
+            // 서버와 연결되지 않으면 0이 나오더라
+            if(ex.status===o){
+                location.href = "error.html"
+            }
+        }
+        })
+
+    </script>
+</body>
+</html>

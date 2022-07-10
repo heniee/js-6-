@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const key='fd54227fdbbffebbf18857a95bf9288a';
+        const cities = [
+          { name:'인천', code:'Incheon'},
+          { name:'서울', code:'Seoul'},
+          { name:'부산', code:'Busan'}, ]
+
+
+        async function getData(cno){
+            const url='http://api.openweathermap.org/geo/1.0/direct?q=${cities[cno].code}&limit=5&appid=${key}';
+            const positionUrl =await $.ajax(url);
+            const 위도 = position[0].lat;
+            const 경도 = position[0].lon;
+            const airUrl='http://api.openweathermap.org/data/2.5/air_pollution?lat=${위도}&lon=${경도}&appid=${key}';
+            const weatherUrl='https://api.openweathermap.org/data/2.5/onecall?lat=${위도}&lon=${경도}&exclude=hourly,minutely&appid=${key}&units=metric';
+            const result = await [$.ajax(airUrl), $.ajax(weatherUrl)];
+
+           console.log(positionUrl);
+
+            return(위도,경도);
+
+        }
+       
+        $(document).ready(function(){
+            let cno=0;
+
+        });
+    </script>
+
+
+</head>
+<body>
+    <div></div>
+</body>
+</html>

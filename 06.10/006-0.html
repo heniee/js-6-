@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--국어, 영어 성적을 입력받아 평균이 90이상이면 우수,
+        70 이상이면 통과, 미만이면 재시험 -->
+</head>
+<body>
+    <input type="number" id="국어" placeholder="국어점수" min="0" max="100" required>
+    <input type="number" id="영어" placeholder="영어점수" min="0" max="100" required>
+    <button onclick="점수()">결과</button>
+    <input type="text" id="결과" placeholder="결과" disabled>
+    <script>
+        function 점수(){
+            const 국어점수=document.querySelector('#국어').value;
+            const 영어점수=document.querySelector('#영어').value;
+            const 결과=document.querySelector('#결과');
+
+            const 평균 = (parseInt(국어점수) + parseInt(영어점수)) /2;
+            console.log(평균);
+            
+            if(평균>=90){
+                alert("우수")
+            } else if(평균>=70){
+                alert("통과")
+            } else{
+                alert("재시험")
+            }
+
+            }
+    </script>
+</body>
+</html>

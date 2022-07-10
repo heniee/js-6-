@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            const input1 =document.querySelector('#kor');
+            const input2 =document.querySelector('#eng');
+            const test=document.querySelector('#test');
+
+            test.onclick = function() {
+                const kor = parseInt(input1.value);
+                const eng = parseInt(input2.value);
+                const result = kor>=70 && eng>=70 ? '통과' : '재시험' ;
+                alert(result);
+            }   
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="kor" placeholder="국어점수">
+    <input type="text" id="eng" placeholder="영어점수">
+    <button id="test">결과는?</button>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        window.onload = function() {
+         const ar = [ 
+            {irum : '홍길동', jumsu:80}, {irum:'전우치', jumsu:75}
+        ];
+     
+            function printAr (arr){
+                const $list = $('#list');
+                const $sum = $('#sum');
+                let sum= 0;
+                for(const ob of arr){
+                    $(`<li>${ob.irum}의 점수는 ${ob.jumsu}</li>`).appendTo($list);
+               sum += ob.jumsu;
+                }
+                $(`<p>총점:${sum}</p>`).appendTo($sum);
+            }
+            printAr(ar);
+        }
+    </script>
+</head>
+<body>
+   <ul id="list">
+
+   </ul>
+   <div id="sum">
+       <p></p>
+   </div>
+</body>
+</html>

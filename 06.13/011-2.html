@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="value">
+    <button id ="three">3의배수 판정</button>
+    <button id ="five">5의배수 판정</button>
+    <script>
+
+       
+        three.onclick = function() {
+        const input =document.querySelector('#value').value;
+        const value=parseInt(input);
+
+            const result = value%3==0 ? '3의배수' : '3의 배수 아님';
+            alert(result);
+       }
+
+       document.querySelector('#five').onclick = function(){
+            const input =document.querySelector('#value').value;
+             const value=parseInt(input);
+             const result = value%5==0 ? '5의배수' : '5의 배수 아님';
+             alert(result);
+       }
+    </script>
+</body>
+</html>

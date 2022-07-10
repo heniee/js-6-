@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>증가</title>
+</head>
+<body onload="init();">
+    <div></div>
+    <button onclick="clickHandler();">증가</button>
+    <script>
+        const a = 10;
+        x = 10;
+        function init() {
+            const b = 20;
+            y = 20;  //키워드 없이 만드는 변수는 독립된 공간을 벗어남 
+           console.log(a);
+           console.log(b);
+           console.log(x);
+           console.log(y);
+        }
+        function clickHandler() {
+            console.log(a);
+            //console.log(b);
+            console.log(x);
+            console.log(y); //그래서 y가 init안에 들어있으면 안보이는 게 정상이지만 
+                            //공간을 벗어났기때문에 출력 됨
+        }
+    </script>
+</body>
+</html>
+<!--scope 
+init clickHandler 각각 독립된 공간이기 때문에 안에있는 게 안보임 
+clickHandler 에서는 b가 안보이기때문에 오류발생 -->

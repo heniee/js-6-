@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <!-- 화면이 로딩되면 이미지를 출력 -->
+    <!-- 버튼 클릭시 이미지 변경 -->
+    <h1>자바 스크립트 전구</h1>
+    <button onclick="켜기();">불을 켭니다</button>
+    <img id="sajin">
+    <button onclick="끄기();">불을 끕니다</button>
+    <script>
+        document.querySelector('#sajin'). src="https://www.w3schools.com/js/pic_bulboff.gif";
+       
+        function 켜기() {
+         document.querySelector('#sajin').src="https://www.w3schools.com/js/pic_bulbon.gif";
+        }
+
+        function 끄기() {
+         document.querySelector('#sajin').src="https://www.w3schools.com/js/pic_bulboff.gif";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>비동기 작업</title>
+    
+</head>
+<body>
+    <script>
+        function a() { console.log('a')}
+        function b() { console.log('b')}
+        function c() { console.log('c')}
+        function sync(){
+            //함수는 하나씩 순서대로 실행 -> 동기(synchronous) 
+            a();
+            b();
+            c();
+        }
+        function async(){ //a의 작업이 성공하면(call back) 동시에 b 실행 -> 비동기(asynchronous)
+            $.ajax().done(function() {a(); b(); c();}); 
+           // b();
+           // c();      /done안에done~~~복잡해지면 불편함 await가 좀 더 쉬움 
+
+            const result = await $.ajax(주소);
+                await a();
+                await b();
+                await c();
+        }
+    </script>
+    <button onclick="sync()">동기작업</button>
+    <button onclick="sync()">비동기작업</button>
+</body>
+</html>

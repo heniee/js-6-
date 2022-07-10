@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        body{ background-color: pink;
+                height:100vh;}
+        #app{ border: 2px solid skyblue;
+                width: 500px;
+                background-color: snow;
+                margin: 0 auto;
+                padding: 5px;
+        }
+        #input{ width: 430px;
+                        }
+        .title{ display: inline-block;
+                width: 400px;}
+        .done{text-decoration: line-through;}
+        
+    </style>
+    <script>
+        const addTodo=(todos)=>{
+            todos.push({title:$('#input').val(), done:false});
+            $('#input').val('');
+            print(todos);
+        }
+
+        const print=(todos)=>{
+            const $ul= $('#todos');
+            $ul.empty();
+            todos.forEach((todo,i)=>{
+                const $li= $('<li>').attr('class', 'todo').attr('data-i',i).appendTo($ul);
+                    if(todo.done==true){
+                        $('<span class="title">').text(todo.title+'(완료)').addClass('done').attr('data-i',i).appendTo($li);
+                    }else{
+                        $('<span class="title">').text(todo.title).attr('data-i',i).appendTo($li);
+                    }
+                    $('<span>').attr('class','close').text('x').attr('data-i',i).appendTo($li);
+            });
+        }
+
+        $(document).ready(function(){
+            const todos = [
+        { title : "산책하기", done:false },
+        { title : "공부하기", done:true },
+        { title : "책읽기", done:false },
+        { title : "운동하기", done:false }
+      ];
+      print(todos);
+
+      $('#add').click(function(){
+          addTodo(todos);
+      });
+      $('#input').keyup(function(e){
+          if(e.keyCode==13)
+          addTodo(todos);
+          });
+      $('#todos').on('click', '.title', function(){
+          todos[$(this).attr('data-i')].done =! todos[$(this).attr('data-i')].done;
+          print(todos);
+          });
+      $('#todos').on('click','.close', function(){
+          todos.splice($(this).attr('data-i'),1);
+          print(todos);
+      });
+        });
+
+    </script>
+</head>
+<body>
+       <div id="app">
+        <input type="text" id="input" placeholder="입력 후 엔터!">
+        <button id="add">추가</button>
+        <ul id="todos">
+        </ul>
+      </div>
+</body>
+</html>

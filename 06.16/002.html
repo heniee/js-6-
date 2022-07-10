@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        #page{width:400px; margin: 0auto;}
+        #canvas {height: 400px; background-color: red;}
+        #position{height: 50px;}
+    </style>
+    <script>
+        $(document).ready(function(){
+            $('#canvas').mousemove(function(e){
+                console.log("move");
+                console.log(`x좌표:${e.pageX}, y좌표:${e.pageY}`);
+                $('#position').text(`x좌표:${e.pageX}, y좌표:${e.pageY}`);
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="page">
+        <div id="canvas">
+            <div id ="position">
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

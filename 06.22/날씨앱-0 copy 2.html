@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <title>날씨앱</title>
+
+ <script>
+     const key='fd54227fdbbffebbf18857a95bf9288a';
+     const cities = [
+          { name:'인천', code:'Incheon'},
+          { name:'서울', code:'Seoul'},
+          { name:'부산', code:'Busan'},
+
+        ];
+     let 좌표 = null;
+     let 날씨 = null;
+     
+    
+     async function getPosition(){
+
+        위도 = result[0].lat;
+        경도 = result[0].lon;
+        좌표 = {위도,경도};
+     }
+
+     function getFormatDate(date){
+        return `${date.getMonth()+1}월 ${date.getDay()}일`;
+     }
+
+     function getFormatTime(date){
+        return `${date.getHours()}: ${date.getMinutes()}`;
+     }
+      async function getWeather(){
+        const url=`http://api.openweathermap.org/geo/1.0/direct?q=${cities[cno].code}&limit=5&appid=${key}`; 
+        const position=await $.ajax(url);
+        const weatherUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${좌표.위도}&lon=${좌표.경도}&appid=${key}&units=metric`;
+        const airUrl=`http://api.openweathermap.org/data/2.5/air_pollution?lat=${좌표.위도}&lon=${좌표.경도}&appid=${key}`;
+        const result = await $.ajax(weatherUrl)
+        const result2 = await $.ajax(airUrl)
+        const 위도 = position[0].lat;
+        const 경도 = position[0].lon;
+
+         const 일출 = new Date(result.current.sunrise*1000);
+         const 일몰 = new Date(result.current.sunset*1000);
+         const 온도 = result.current.temp;
+         const 습도 = result.current.humidity;
+         const 최저 = result.daily[0].temp.min;
+         const 최고 = result.daily[0].temp.max;
+         const 체감 = result.current.feels_like;
+         const 자외선 = result.current.uvi;
+         const 상태=result.current.weather[0].main;
+         const 미세 = result2.list[0].components.pm10;
+         const 초미세 = result2.list[0].components.pm2_5;
+
+         let 예보 = [];
+         for(let i=1; i<=7; i++){
+            const sunrise = new Date(result.daily[i].sunrise*1000);
+            const 날짜 = getFormatDate(sunrise);
+            const 일출 = getFormatTime(sunrise);
+            const 상태 = result.daily[i].weather[0].main;
+            예보[i-1] = {날짜,일출,상태};
+         }    
+         
+         날씨={위도,경도,일출,일몰,온도,습도,최저,최고,체감,자외선,상태,예보,미세,초미세} 
+         console.log(날씨);      
+    }
+
+      $(document).ready(async function(){
+         await getPosition();
+         await getWeather();
+
+      })
+   
+
+ </script>
+</head>
+<body>
+    <h1>Weather App</h1>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="init();"> <!--스크립트에 바로 작업하지 않고 함수 안에서 작업하는 게 좋음 -->
+    <div id="num"></div>
+    <button onclick="증가();">증가</button>
+    <script>
+        let count = 0;
+        function init() {
+            document.querySelector('#num').innerHTML= count; //0이 div에 출력 될 수 있게 보내기 
+        }
+        function 증가() {
+           count++; //count = count+1 과 같음
+           document.querySelector('#num').innerHTML = count;
+        }
+    </script>
+</body>
+</html>

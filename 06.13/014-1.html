@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <script>
+            window.onload=function() {
+                const cm = document.querySelector('#cm');
+                const kg = document.querySelector('#kg');
+                const 계산 = document.querySelector('#계산');
+
+                계산.onclick = function() {
+                    const cminput=parseInt(cm);
+                    const kginput = parseInt(kg);
+                    const height= cminput/100;
+                    const bmi = (kginput/(height*height));  
+                    console.log(cminput);
+                }
+            }
+        </script>
+</head>
+<body>
+    <h1>BMI 계산기</h1>
+    키 : <input type="text" id="cm" placeholder="cm"> 
+    체중 : <input type="text" id="kg" placeholder="kg"> 
+    <button id="계산">계산하기</button>
+    결과 :<span id="result"></span>
+</body>
+</html>

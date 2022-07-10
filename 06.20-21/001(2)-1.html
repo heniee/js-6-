@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+
+        async function getPosition(city,limit,key,positionUrl){
+            const result = await $.ajax({
+                url :positionUrl,
+                data:{q:city, limit:limit, appid:key},
+                method:'get',
+                processData: true
+            });
+            console.log(result);
+            return {위도:result[0].lat, 경도:result[0].lon};
+        }
+
+        $(document).ready(async function(){
+            const key='fd54227fdbbffebbf18857a95bf9288a';
+            const positionUrl= 'https://api.openweathermap.org/geo/1.0/direct';
+            const airUrl='https://api.openweathermap.org/data/2.5/air_pollution';
+            const weatherUrl= 'https://api.openweathermap.org/data/2.5/onecall';
+            const city = 'Incheon';
+            const limit = 1;
+            const position = await getPosition(city, limit, key, positionUrl);
+            console.log(position);
+
+
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
